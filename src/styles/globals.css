@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --blue: #2a7de1;
+    --red: #ff595a;
+  }
+  html {
+    font-family: Roboto, sans-serif;
+  }
+
+  html,
+  body,
+  #__next {
+    height: 100%;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .grid-big {
+    @apply grid gap-5 xs:grid-cols-[repeat(auto-fit,_minmax(300px,_auto))] grid-cols-1;
+  }
+
+  .grid-medium {
+    @apply grid gap-5 xs:grid-cols-[repeat(auto-fit,_minmax(400px,_auto))] grid-cols-1;
+  }
+
+  .btnRead {
+    @apply flex items-center space-x-2 font-semibold text-[color:var(--blue)] hover:opacity-80 
+    transition-all duration-300;
+  }
+
+  .imgHover {
+    @apply cursor-pointer hover:brightness-90 transition duration-300;
+  }
+
+  .dividerLine {
+    @apply w-full h-[1.4px] bg-gray-300 mt-6 mb-10;
+  }
+}
+
+/* xs:grid-cols-[repeat(auto-fit,_minmax(400px,_auto))] */
