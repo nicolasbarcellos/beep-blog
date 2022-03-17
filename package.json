@@ -10,11 +10,16 @@
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@babel/plugin-proposal-do-expressions": "^7.16.7",
+    "@graphcms/rich-text-react-renderer": "^0.4.2",
+    "@types/prismjs": "^1.26.0",
+    "babel-plugin-prismjs": "^2.1.0",
     "graphql": "^16.3.0",
     "graphql-request": "^4.0.0",
     "html-react-parser": "^1.4.8",
     "moment": "^2.29.1",
     "next": "12.1.0",
+    "prismjs": "^1.27.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
@@ -22,6 +27,7 @@
     "react-multi-carousel": "^2.8.0"
   },
   "devDependencies": {
+    "@graphcms/rich-text-types": "^0.3.1",
     "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/typescript": "2.4.5",
     "@graphql-codegen/typescript-operations": "2.3.2",

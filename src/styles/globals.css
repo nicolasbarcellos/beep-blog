@@ -20,12 +20,12 @@
 }
 
 @layer components {
-  .grid-big {
+  .grid-default {
     @apply grid gap-5 xs:grid-cols-[repeat(auto-fit,_minmax(300px,_auto))] grid-cols-1;
   }
 
-  .grid-medium {
-    @apply grid gap-5 xs:grid-cols-[repeat(auto-fit,_minmax(400px,_auto))] grid-cols-1;
+  .grid-small {
+    @apply grid gap-5 md:grid-cols-[repeat(auto-fit,_minmax(300px,_auto))] sm:grid-cols-2 grid-cols-1 ;
   }
 
   .btnRead {
@@ -38,7 +38,7 @@
   }
 
   .dividerLine {
-    @apply w-full h-[1.4px] bg-gray-300 mt-6 mb-10;
+    @apply w-full h-[1.4px] bg-gray-300 mt-6 mb-10 ;
   }
 }
 

@@ -6,6 +6,7 @@ import {
   GET_FEATURED_POSTS,
   GET_LAST_POST,
   GET_POSTS,
+  GET_TECHNOLOGY_POSTS,
 } from "../services/queries";
 import client from "../services/client";
 import { Categories, CategoriesType } from "../components/Categories";
@@ -17,20 +18,21 @@ import {
   GetPostsQuery,
 } from "../services/generated/graphql";
 import PostWrapper from "../components/PostsWrapper";
-import { fetchData } from "../../utils/fetchData";
+import { fetchData } from "../utils/fetchData";
 
 type HomeProps = {
   data: {
     categories: CategoriesType[];
-    // allPosts: any;
     featuredPosts: any;
     latestPost: any;
     businessPosts: any;
+    technologyPosts: any;
+    postsDemoWorld: any;
+    postsDemoSafety: any;
   };
 };
 
 const Home = ({ data }: HomeProps) => {
-  console.log(data.businessPosts)
   return (
     <div className="container overflow-x-hidden">
       <Head>
@@ -43,20 +45,42 @@ const Home = ({ data }: HomeProps) => {
           latestPost: data.latestPost,
           featuredPosts: data.featuredPosts,
         }}
-        grid="3/1"
+        grid="initial"
       />
       <PostWrapper
         posts={{
           businessPosts: data.businessPosts,
         }}
-        grid="2/2"
+        grid="business"
+      />
+
+      <PostWrapper
+        posts={{
+          technologyPosts: data.technologyPosts,
+        }}
+        grid="technology"
+      />
+
+      <PostWrapper
+        posts={{
+          postsDemoWorld: data.postsDemoWorld,
+        }}
+        grid="world"
+      />
+
+      <PostWrapper
+        posts={{
+          postsDemoSafety: data.postsDemoSafety,
+        }}
+        grid="safety"
       />
     </div>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const { posts: allPosts } = await client.request<GetPostsQuery>(GET_POSTS);
+  const { posts: postsDemoWorld } = await fetchData(GET_POSTS, { first: 8 });
+  const { posts: postsDemoSafety } = await fetchData(GET_POSTS, { first: 4 });
   const { categories } = await fetchData(GET_CATEGORIES);
 
   const { posts: featuredPosts } = await fetchData(GET_FEATURED_POSTS, {
@@ -64,6 +88,12 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
   const { posts: latestPost } = await fetchData(GET_LAST_POST);
+
+  const [{ posts: twoTechnologyPost }, { posts: restTechnologyPost }] =
+    await Promise.all([
+      fetchData(GET_TECHNOLOGY_POSTS, { first: 2 }),
+      fetchData(GET_TECHNOLOGY_POSTS, { first: 3 }),
+    ]);
 
   const [{ posts: firstBusinessPost }, { posts: restBusinessPost }] =
     await Promise.all([
@@ -74,13 +104,18 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       data: {
-        // allPosts,
+        postsDemoWorld,
+        postsDemoSafety,
         categories,
         featuredPosts,
         latestPost,
         businessPosts: {
           firstBusinessPost,
           restBusinessPost,
+        },
+        technologyPosts: {
+          twoTechnologyPost,
+          restTechnologyPost,
         },
       },
     },

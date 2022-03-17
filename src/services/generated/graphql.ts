@@ -5592,10 +5592,19 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
-export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetPostsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>;
+}>;
 
 
 export type GetPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', exerpect: string, createdAt: any, slug: string, title: string, author?: { __typename?: 'Author', bio?: string | null, name: string, id: string, photo?: { __typename?: 'Asset', url: string } | null } | null, featured_image: { __typename?: 'Asset', url: string }, categories: Array<{ __typename?: 'Category', name: string, slug: string }> }> };
+
+export type GetPostBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type GetPostBySlugQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', createdAt: any, slug: string, title: string, author?: { __typename?: 'Author', bio?: string | null, name: string, id: string, photo?: { __typename?: 'Asset', url: string } | null } | null, featured_image: { __typename?: 'Asset', url: string }, content: { __typename?: 'PostContentRichText', html: string } }> };
 
 export type GetLatestPostQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5613,6 +5622,13 @@ export type GetBusinessPostsQueryVariables = Exact<{
 
 
 export type GetBusinessPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', exerpect: string, createdAt: any, slug: string, title: string, author?: { __typename?: 'Author', bio?: string | null, name: string, id: string, photo?: { __typename?: 'Asset', url: string } | null } | null, featured_image: { __typename?: 'Asset', url: string }, categories: Array<{ __typename?: 'Category', name: string, slug: string }> }> };
+
+export type GetTechnologyPostsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type GetTechnologyPostsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', exerpect: string, createdAt: any, slug: string, title: string, author?: { __typename?: 'Author', bio?: string | null, name: string, id: string, photo?: { __typename?: 'Asset', url: string } | null } | null, featured_image: { __typename?: 'Asset', url: string }, categories: Array<{ __typename?: 'Category', name: string, slug: string }> }> };
 
 export type GetFeaturedPostsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>;
