@@ -28,6 +28,7 @@ export type CommentData = {
   name: string;
   email: string;
   comment: string;
+  slug?: string;
 };
 
 export type CommentsType = {
