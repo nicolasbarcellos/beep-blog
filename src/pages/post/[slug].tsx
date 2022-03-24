@@ -33,7 +33,6 @@ interface PostType extends PostDetailsData {
 }
 
 export default function PostDetails({ post, comments }: PostType) {
-  console.log(comments)
   const router = useRouter();
 
   if (router.isFallback) {
