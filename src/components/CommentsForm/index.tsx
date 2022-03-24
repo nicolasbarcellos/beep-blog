@@ -17,12 +17,6 @@ type FormValues = {
   comment: string;
 };
 
-// implementar react hook form - ok
-// fazer status loading no comment - ok
-// mostrar mensagem de sucesso que o comentário foi enviado - ok
-// arrumar nav da home
-// arrumar grid technology
-
 export const CommentsForm = ({ slug }: CommentsFormData) => {
   const {
     register,
