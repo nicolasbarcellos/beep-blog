@@ -34,12 +34,12 @@ export const CommentsForm = ({ slug }: CommentsFormData) => {
   const sendComment: SubmitHandler<FormValues> = async (data, event) => {
     event?.preventDefault();
 
-    try {
-      await submitComment({ ...data, slug });
-      toast.success("Comment send to review");
-    } catch (error: any) {
-      toast.error(error.message);
-    }
+    // try {
+    //   await submitComment({ ...data, slug });
+    //   toast.success("Comment send to review");
+    // } catch (error: any) {
+    //   toast.error(error.message);
+    // }
   };
 
   useEffect(() => {
