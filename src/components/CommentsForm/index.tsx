@@ -44,6 +44,7 @@ export const CommentsForm = ({ slug }: CommentsFormData) => {
 
   useEffect(() => {
     reset();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSubmitSuccessful]);
 
   return (
