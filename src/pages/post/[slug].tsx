@@ -136,6 +136,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       post,
       comments,
     },
-    revalidate: 3600, // 1 min
+    revalidate: 60, // 1 min
   };
 };
