@@ -122,7 +122,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   );
 
-  console.log(comments);
 
   if (!postArr.length) {
     return {
