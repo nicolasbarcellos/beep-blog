@@ -7,6 +7,8 @@ export default async function asynchandler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
+  console.log(res)
   const query = gql`
     mutation CreateComment(
       $name: String!
