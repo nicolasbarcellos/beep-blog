@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CommentData } from "../types/commentData";
+import { CommentData } from "../types";
 
 export const submitComment = async (obj: CommentData) => {
   const payload = obj;
