@@ -50,4 +50,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 Made with 💜 by Nicolas Barcellos 👋 [Check out my LinkedIn](https://www.linkedin.com/in/nicolas-barcellos-868b341ab/)
-[Design by](https://www.behance.net/gallery/108645399/BEEP-Blog-Web-Light-Modern-UI-Design)
+
+[Design by Pasindu Madushan](https://www.behance.net/gallery/108645399/BEEP-Blog-Web-Light-Modern-UI-Design)
