@@ -1,4 +1,4 @@
-import { memo } from "react";
+
 import { PostCard } from "../PostCard";
 
 const PostWrapper = ({ posts, grid = "" }: any) => {
@@ -48,7 +48,7 @@ const PostWrapper = ({ posts, grid = "" }: any) => {
         <>
           <h2 className="font-bold my-4 uppercase">Technology</h2>
           <div className="grid-default">
-            <div className="flex gap-5 sm:flex-col md:flex-row">
+            <div className="flex xl:gap-4 flex-col xl:flex-row">
               {posts.technologyPosts.twoTechnologyPost?.map((post: any) => (
                 <PostCard key={post.slug} size="large" post={post} />
               ))}
@@ -89,4 +89,4 @@ const PostWrapper = ({ posts, grid = "" }: any) => {
   );
 };
 
-export default memo(PostWrapper);
+export default PostWrapper;

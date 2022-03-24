@@ -1678,6 +1678,7 @@ export type Comment = Node & {
   /** The unique identifier */
   id: Scalars['ID'];
   name: Scalars['String'];
+  post?: Maybe<Post>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']>;
   /** User that last published this document */
@@ -1708,6 +1709,11 @@ export type CommentHistoryArgs = {
   limit?: Scalars['Int'];
   skip?: Scalars['Int'];
   stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type CommentPostArgs = {
+  locales?: InputMaybe<Array<Locale>>;
 };
 
 
@@ -1753,6 +1759,7 @@ export type CommentCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
   name: Scalars['String'];
+  post?: InputMaybe<PostCreateOneInlineInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -1881,6 +1888,7 @@ export type CommentManyWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
+  post?: InputMaybe<PostWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1939,6 +1947,7 @@ export type CommentUpdateInput = {
   comment?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+  post?: InputMaybe<PostUpdateOneInlineInput>;
 };
 
 export type CommentUpdateManyInlineInput = {
@@ -1960,6 +1969,8 @@ export type CommentUpdateManyInlineInput = {
 
 export type CommentUpdateManyInput = {
   comment?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
 };
 
 export type CommentUpdateManyWithNestedWhereInput = {
@@ -2107,6 +2118,7 @@ export type CommentWhereInput = {
   name_not_starts_with?: InputMaybe<Scalars['String']>;
   /** All values starting with the given string. */
   name_starts_with?: InputMaybe<Scalars['String']>;
+  post?: InputMaybe<PostWhereInput>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -2146,9 +2158,7 @@ export type CommentWhereInput = {
 
 /** References Comment record uniquely */
 export type CommentWhereUniqueInput = {
-  email?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
-  name?: InputMaybe<Scalars['String']>;
 };
 
 export type ConnectPositionInput = {
@@ -3171,6 +3181,7 @@ export type Post = Node & {
   __typename?: 'Post';
   author?: Maybe<Author>;
   categories: Array<Category>;
+  comments: Array<Comment>;
   content: PostContentRichText;
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
@@ -3215,6 +3226,18 @@ export type PostCategoriesArgs = {
   orderBy?: InputMaybe<CategoryOrderByInput>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<CategoryWhereInput>;
+};
+
+
+export type PostCommentsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<CommentOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<CommentWhereInput>;
 };
 
 
@@ -3298,6 +3321,7 @@ export type PostContentRichTextEmbeddedTypes = Asset | Author | Category | Comme
 export type PostCreateInput = {
   author?: InputMaybe<AuthorCreateOneInlineInput>;
   categories?: InputMaybe<CategoryCreateManyInlineInput>;
+  comments?: InputMaybe<CommentCreateManyInlineInput>;
   content: Scalars['RichTextAST'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
   exerpect: Scalars['String'];
@@ -3345,6 +3369,9 @@ export type PostManyWhereInput = {
   categories_every?: InputMaybe<CategoryWhereInput>;
   categories_none?: InputMaybe<CategoryWhereInput>;
   categories_some?: InputMaybe<CategoryWhereInput>;
+  comments_every?: InputMaybe<CommentWhereInput>;
+  comments_none?: InputMaybe<CommentWhereInput>;
+  comments_some?: InputMaybe<CommentWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -3500,6 +3527,7 @@ export enum PostOrderByInput {
 export type PostUpdateInput = {
   author?: InputMaybe<AuthorUpdateOneInlineInput>;
   categories?: InputMaybe<CategoryUpdateManyInlineInput>;
+  comments?: InputMaybe<CommentUpdateManyInlineInput>;
   content?: InputMaybe<Scalars['RichTextAST']>;
   exerpect?: InputMaybe<Scalars['String']>;
   featured_image?: InputMaybe<AssetUpdateOneInlineInput>;
@@ -3589,6 +3617,9 @@ export type PostWhereInput = {
   categories_every?: InputMaybe<CategoryWhereInput>;
   categories_none?: InputMaybe<CategoryWhereInput>;
   categories_some?: InputMaybe<CategoryWhereInput>;
+  comments_every?: InputMaybe<CommentWhereInput>;
+  comments_none?: InputMaybe<CommentWhereInput>;
+  comments_some?: InputMaybe<CommentWhereInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -5604,12 +5635,19 @@ export type GetPostBySlugQueryVariables = Exact<{
 }>;
 
 
-export type GetPostBySlugQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', createdAt: any, slug: string, title: string, author?: { __typename?: 'Author', bio?: string | null, name: string, id: string, photo?: { __typename?: 'Asset', url: string } | null } | null, featured_image: { __typename?: 'Asset', url: string }, content: { __typename?: 'PostContentRichText', html: string } }> };
+export type GetPostBySlugQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', createdAt: any, slug: string, title: string, author?: { __typename?: 'Author', bio?: string | null, name: string, id: string, photo?: { __typename?: 'Asset', url: string } | null } | null, featured_image: { __typename?: 'Asset', url: string }, content: { __typename?: 'PostContentRichText', raw: any } }> };
 
 export type GetLatestPostQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetLatestPostQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', exerpect: string, createdAt: any, slug: string, title: string, author?: { __typename?: 'Author', bio?: string | null, name: string, id: string, photo?: { __typename?: 'Asset', url: string } | null } | null, featured_image: { __typename?: 'Asset', url: string }, categories: Array<{ __typename?: 'Category', name: string, slug: string }> }> };
+
+export type GetCommentsByPostQueryVariables = Exact<{
+  slug?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type GetCommentsByPostQuery = { __typename?: 'Query', comments: Array<{ __typename?: 'Comment', name: string, createdAt: any, comment: string }> };
 
 export type GetWorldPostsQueryVariables = Exact<{ [key: string]: never; }>;
 

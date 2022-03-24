@@ -23,3 +23,17 @@ export type PostDetailsData = {
     };
   };
 };
+
+export type CommentData = {
+  name: string;
+  email: string;
+  comment: string;
+};
+
+export type CommentsType = {
+  comments: {
+    name: string;
+    createdAt: string;
+    comment: string;
+  };
+};

@@ -1,5 +1,3 @@
-import { BsArrowLeft, BsSearch } from "react-icons/bs";
-
 export type CategoriesType = {
   name: string;
 };
@@ -10,21 +8,22 @@ type CategoriesData = {
 
 export const Categories = ({ categories }: CategoriesData) => {
   return (
-    <div className="container overflow-x-hidden">
-      <div>
-        <BsArrowLeft />
-        <h2>Blog</h2>
-      </div>
-      <div>
+    <div className=" overflow-x-hidden">
+      <div className="flex">
         {categories.map((categorie) => (
-          <span key={categorie.name}>{categorie.name}</span>
+          <ul key={categorie.name}>
+            <li className=''>
+              <a
+                href={`/posts/categories/${encodeURIComponent(
+                  categorie.name.toLowerCase()
+                )}`}
+              >
+                {categorie.name}
+              </a>
+            </li>
+          </ul>
         ))}
       </div>
-      <label>
-        <input type="text" />
-        <span>Search</span>
-        <BsSearch />
-      </label>
     </div>
   );
 };

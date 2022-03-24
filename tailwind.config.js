@@ -7,7 +7,7 @@ module.exports = {
   ],
   theme: {
     screens: {
-      xs: "360px",
+      xs: "380px",
       ...defaultTheme.screens,
     },
     container: {
@@ -44,7 +44,9 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')
+  ],
 };
 
 // @keyframes bounce {

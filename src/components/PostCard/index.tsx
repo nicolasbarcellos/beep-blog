@@ -9,7 +9,7 @@ export const PostCard = ({ post, size = "" }: any) => {
       {size === "large" && (
         <Link href={`post/${post.slug}`} passHref>
           <div className="pb-8">
-            <div
+            {/* <div
               className="relative w-full h-56 xs:h-96 overflow-hidden rounded-md flex-shrink-0 shadow-md
           imgHover"
             >
@@ -20,7 +20,19 @@ export const PostCard = ({ post, size = "" }: any) => {
                 alt={post.title}
                 className="flex-shrink-0"
               />
-            </div>
+            </div> */}
+
+            <Image
+              loading="lazy"
+              src={post.featured_image.url}
+              width={800}
+              height={400}
+              objectFit="cover"
+              alt={post.title}
+              placeholder="blur"
+              blurDataURL="/images/default.jpg"
+              className="flex-shrink-0 overflow-hidden rounded-md imgHover shadow-md"
+            />
             <div>
               <Moment
                 format="MMM DD, YYYY"
@@ -28,7 +40,12 @@ export const PostCard = ({ post, size = "" }: any) => {
               >
                 {post.createdAt}
               </Moment>
-              <h2 className="font-bold text-lg xs:text-2xl tracking-wide leading-tight">
+              {/* <div className="cursor-pointer flex flex-col  h-32">
+              <h2
+                className="font-bold text-lg tracking-wide leading-tight mt-2 hover:text-gray-700
+            transition duration-300"
+              > */}
+              <h2 className="cursor-pointer font-bold text-lg xs:text-2xl tracking-wide leading-tight hover:text-gray-700  transition duration-300">
                 {post.title}
               </h2>
               <p className="text-gray-500 text-sm xs:text-base mb-4 mt-2">
@@ -49,10 +66,10 @@ export const PostCard = ({ post, size = "" }: any) => {
       {size === "medium" && (
         <Link href={`post/${post.slug}`} passHref>
           <div
-            className="pb-8 sm:grid sm:items-center sm:h-56 h-96
-        overflow-hidden sm:grid-cols-2 flex gap-4 items-start flex-col"
+            className="pb-4 2xl:pb-8 lg:grid 
+        overflow-hidden lg:grid-cols-2 flex gap-4 items-start flex-col"
           >
-            <div
+            {/* <div
               className="relative w-full rounded-md shadow-md self-start 
           overflow-hidden h-56 xs:h-full  imgHover"
             >
@@ -63,10 +80,22 @@ export const PostCard = ({ post, size = "" }: any) => {
                 alt={post.title}
                 className=""
               />
-            </div>
+            </div> */}
+            <Image
+              loading="lazy"
+              src={post.featured_image.url}
+              width={1000}
+              height={600}
+              objectFit="cover"
+              alt={post.title}
+              placeholder="blur"
+              blurDataURL="/images/default.jpg"
+              className="flex-shrink-0 overflow-hidden rounded-md imgHover 
+                shadow-md"
+            />
             <div className="cursor-pointer">
               <h2
-                className="font-bold text-lg tracking-wide leading-tight my-2 hover:text-gray-700
+                className="font-bold text-lg tracking-wide leading-tight hover:text-gray-700
             transition duration-300"
               >
                 {post.title}
@@ -95,7 +124,7 @@ export const PostCard = ({ post, size = "" }: any) => {
             className="pb-8 sm:pb-0
          relative flex-grow overflow-hidden"
           >
-            <div
+            {/* <div
               className="relative w-full rounded-md shadow-md
           overflow-hidden h-56 sm:h-44 imgHover"
             >
@@ -106,7 +135,18 @@ export const PostCard = ({ post, size = "" }: any) => {
                 alt={post.title}
                 className=""
               />
-            </div>
+            </div> */}
+            <Image
+              loading="lazy"
+              src={post.featured_image.url}
+              width={1000}
+              height={600}
+              objectFit="cover"
+              alt={post.title}
+              placeholder="blur"
+              blurDataURL="/images/default.jpg"
+              className="flex-shrink-0 overflow-hidden rounded-md imgHover shadow-md"
+            />
             <div className="cursor-pointer flex flex-col  h-32">
               <h2
                 className="font-bold text-lg tracking-wide leading-tight mt-2 hover:text-gray-700

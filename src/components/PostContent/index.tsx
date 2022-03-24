@@ -1,11 +1,12 @@
-import { PostDetailsData } from "../../types/postData";
 import { RichText } from "@graphcms/rich-text-react-renderer";
 import Image from "next/image";
-import { useEffect } from "react";
+import Prism from "prismjs";
+
+import { PostDetailsData } from "../../types";
 
 export const PostContent = ({ post }: PostDetailsData) => {
   return (
-    <div className="container">
+    <div className="">
       <RichText
         content={post.content.raw}
         renderers={{
@@ -35,24 +36,17 @@ export const PostContent = ({ post }: PostDetailsData) => {
           img: ({ src = "/images/default.jpg", altText, height, width }) => (
             <div className="flex items-center justify-center my-10">
               <Image
+                loading="lazy"
                 src={src}
                 alt={altText}
                 height={height}
                 width={width}
+                placeholder="blur"
+                blurDataURL="/images/default.jpg"
                 objectFit="cover"
               />
             </div>
           ),
-          code_block: ({ children }) => {
-            return (
-              <pre
-                className="line-numbers rounded-md shadow-md 
-              !my-6"
-              >
-                <code className="language-js">{children}</code>
-              </pre>
-            );
-          },
         }}
       />
       <div className="dividerLine"></div>

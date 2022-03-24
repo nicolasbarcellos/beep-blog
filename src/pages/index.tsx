@@ -9,7 +9,7 @@ import {
   GET_TECHNOLOGY_POSTS,
 } from "../services/queries";
 import client from "../services/client";
-import { Categories, CategoriesType } from "../components/Categories";
+import { CategoriesType } from "../components/Categories";
 import {
   GetBusinessPostsQuery,
   GetCategoriesQuery,
@@ -18,17 +18,18 @@ import {
   GetPostsQuery,
 } from "../services/generated/graphql";
 import PostWrapper from "../components/PostsWrapper";
-import { fetchData } from "../utils/fetchData";
+import { PostDetailsData } from "../types";
+import { Loader } from "../components/Loader";
 
 type HomeProps = {
   data: {
     categories: CategoriesType[];
-    featuredPosts: any;
-    latestPost: any;
-    businessPosts: any;
-    technologyPosts: any;
-    postsDemoWorld: any;
-    postsDemoSafety: any;
+    featuredPosts: PostDetailsData;
+    latestPost: PostDetailsData;
+    businessPosts: PostDetailsData;
+    technologyPosts: PostDetailsData;
+    postsDemoWorld: PostDetailsData;
+    postsDemoSafety: PostDetailsData;
   };
 };
 
@@ -38,8 +39,6 @@ const Home = ({ data }: HomeProps) => {
       <Head>
         <title>Beep Blog</title>
       </Head>
-
-      <Categories categories={data.categories} />
       <PostWrapper
         posts={{
           latestPost: data.latestPost,
@@ -79,26 +78,39 @@ const Home = ({ data }: HomeProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { posts: postsDemoWorld } = await fetchData(GET_POSTS, { first: 8 });
-  const { posts: postsDemoSafety } = await fetchData(GET_POSTS, { first: 4 });
-  const { categories } = await fetchData(GET_CATEGORIES);
+  const { posts: postsDemoWorld } = await client.request<GetPostsQuery>(
+    GET_POSTS,
+    { first: 8 }
+  );
+  const { posts: postsDemoSafety } = await client.request<GetPostsQuery>(
+    GET_POSTS,
+    { first: 4 }
+  );
+  const { categories } = await client.request<GetCategoriesQuery>(
+    GET_CATEGORIES
+  );
 
-  const { posts: featuredPosts } = await fetchData(GET_FEATURED_POSTS, {
-    first: 3,
-  });
+  const { posts: featuredPosts } = await client.request<GetFeaturedPostsQuery>(
+    GET_FEATURED_POSTS,
+    {
+      first: 3,
+    }
+  );
 
-  const { posts: latestPost } = await fetchData(GET_LAST_POST);
+  const { posts: latestPost } = await client.request<GetLatestPostQuery>(
+    GET_LAST_POST
+  );
 
   const [{ posts: twoTechnologyPost }, { posts: restTechnologyPost }] =
     await Promise.all([
-      fetchData(GET_TECHNOLOGY_POSTS, { first: 2 }),
-      fetchData(GET_TECHNOLOGY_POSTS, { first: 3 }),
+      client.request<GetPostsQuery>(GET_TECHNOLOGY_POSTS, { first: 2 }),
+      client.request<GetPostsQuery>(GET_TECHNOLOGY_POSTS, { first: 3 }),
     ]);
 
   const [{ posts: firstBusinessPost }, { posts: restBusinessPost }] =
     await Promise.all([
-      fetchData(GET_BUSINESS_POSTS, { first: 1 }),
-      fetchData(GET_BUSINESS_POSTS, { first: 4 }),
+      client.request<GetBusinessPostsQuery>(GET_BUSINESS_POSTS, { first: 1 }),
+      client.request<GetBusinessPostsQuery>(GET_BUSINESS_POSTS, { first: 4 }),
     ]);
 
   return {

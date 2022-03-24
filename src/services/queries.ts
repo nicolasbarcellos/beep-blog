@@ -26,7 +26,6 @@ export const GET_POSTS = gql`
   }
 `;
 
-
 export const GET_POST_BY_SLUG = gql`
   query getPostBySlug($slug: String!) {
     posts(where: { slug: $slug }) {
@@ -73,6 +72,16 @@ export const GET_LAST_POST = gql`
         name
         slug
       }
+    }
+  }
+`;
+
+export const GET_COMMENTS_BY_POST = gql`
+  query getCommentsByPost($slug: String) {
+    comments(where: { post: { slug: $slug } }, orderBy: createdAt_DESC) {
+      name
+      createdAt
+      comment
     }
   }
 `;
