@@ -10,7 +10,6 @@ type CommentsData = {
 };
 
 const Comments = ({ comments }: CommentsData) => {
-  console.log(comments)
   return (
     <div className="sm:max-w-2xl sm:mx-auto sm:px-4">
       <h3 className="font-bold text-lg mb-2 mt-8">Comments</h3>

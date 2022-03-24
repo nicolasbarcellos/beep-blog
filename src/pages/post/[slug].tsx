@@ -22,6 +22,7 @@ import { PostAuthor } from "../../components/PostAuthor";
 import { CommentsForm } from "../../components/CommentsForm";
 import Head from "next/head";
 import Comments from "../../components/Comments";
+import { Loader } from "../../components/Loader";
 
 interface PostType extends PostDetailsData {
   comments: {
@@ -36,7 +37,7 @@ export default function PostDetails({ post, comments }: PostType) {
   const router = useRouter();
 
   if (router.isFallback) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   return (
