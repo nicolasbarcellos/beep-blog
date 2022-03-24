@@ -33,7 +33,7 @@ interface PostType extends PostDetailsData {
 }
 
 export default function PostDetails({ post, comments }: PostType) {
-  console.log(comments)
+  console.log(comments);
   const router = useRouter();
 
   if (router.isFallback) {
@@ -119,10 +119,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { comments } = await client.request<GetCommentsByPostQuery>(
     GET_COMMENTS_BY_POST,
     {
-      slug: "introducing-jsx",
+      slug: `${params?.slug}`,
     }
   );
-
 
   if (!postArr.length) {
     return {
@@ -137,6 +136,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       post,
       comments,
     },
-    revalidate: 60, // 1 min
+    revalidate: 3600, // 1 min
   };
 };
